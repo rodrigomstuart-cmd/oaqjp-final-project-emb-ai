@@ -1,4 +1,4 @@
-# Emotion Detection Web Application
+# Final project
 
 Final project for the IBM course **Developing AI Applications with Python and
 Flask**. The application sends English text to the Skills Network Watson NLP
