@@ -1,0 +1,26 @@
+def _empty_result():
+    """Return the expected response shape when Watson cannot analyze the text."""
+    return {
+        "anger": None,
+        "disgust": None,
+        "fear": None,
+        "joy": None,
+        "sadness": None,
+        "dominant_emotion": None,
+    }
+
+
+def emotion_detector(text_to_analyse):
+    """Return emotion scores and the dominant emotion for the supplied text."""
+    payload = {"raw_document": {"text": text_to_analyse}}
+    response = requests.post(
+        EMOTION_URL,
+        json=payload,
+        headers=MODEL_HEADERS,
+        timeout=30,
+    )
+
+    if response.status_code == 400:
+        return _empty_result()
+
+    # Remaining response parsing returns the formatted emotion dictionary.

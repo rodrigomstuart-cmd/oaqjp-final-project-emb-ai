@@ -1,0 +1,10 @@
+$ python3.11 -m unittest -v
+test_bad_request_returns_empty_result (test_emotion_detection.TestEmotionDetector.test_bad_request_returns_empty_result)
+Return the required None values when Watson responds with HTTP 400. ... ok
+test_required_dominant_emotions (test_emotion_detection.TestEmotionDetector.test_required_dominant_emotions)
+Identify the expected dominant emotion for the five course phrases. ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+OK

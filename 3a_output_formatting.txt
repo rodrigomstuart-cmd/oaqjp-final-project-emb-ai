@@ -1,0 +1,29 @@
+def emotion_detector(text_to_analyse):
+    """Return emotion scores and the dominant emotion for the supplied text."""
+    payload = {"raw_document": {"text": text_to_analyse}}
+
+    response = requests.post(
+        EMOTION_URL,
+        json=payload,
+        headers=MODEL_HEADERS,
+        timeout=30,
+    )
+
+    formatted_response = json.loads(response.text)
+    scores = formatted_response["emotionPredictions"][0]["emotion"]
+    result = {name: scores[name] for name in EMOTION_NAMES}
+    result["dominant_emotion"] = max(
+        EMOTION_NAMES,
+        key=lambda name: result[name],
+    )
+    return result
+
+# Returned shape:
+# {
+#     "anger": anger_score,
+#     "disgust": disgust_score,
+#     "fear": fear_score,
+#     "joy": joy_score,
+#     "sadness": sadness_score,
+#     "dominant_emotion": "<name of the dominant emotion>",
+# }
